@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>袁睿琳 · 个人主页</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #FFF5F7;
+            --primary-pink: #F8C8DC;
+            --accent-pink: #E598B2;
+            --deep-pink: #D4839A;
+            --text-color: #333333;
+            --text-light: #666666;
+            --white: #ffffff;
+            --shadow: 0 4px 20px rgba(248, 200, 220, 0.3);
+            --shadow-hover: 0 8px 30px rgba(248, 200, 220, 0.5);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Noto Sans SC', sans-serif; background-color: var(--bg-color); color: var(--text-color); line-height: 1.8; }
+        
+        nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(255, 245, 247, 0.95); backdrop-filter: blur(10px); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; z-index: 1000; box-shadow: 0 2px 10px rgba(248, 200, 220, 0.2); }
+        .nav-logo { font-size: 1.3rem; font-weight: 600; color: var(--deep-pink); }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-color); font-weight: 500; transition: all 0.3s ease; position: relative; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--accent-pink); transition: width 0.3s ease; }
+        .nav-links a:hover { color: var(--deep-pink); }
+        .nav-links a:hover::after { width: 100%; }
+        
+        section { min-height: 100vh; padding: 100px 5% 60px; opacity: 0; transform: translateY(30px); animation: fadeInUp 0.8s ease forwards; }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+        section:nth-child(2) { animation-delay: 0.1s; }
+        section:nth-child(3) { animation-delay: 0.2s; }
+        section:nth-child(4) { animation-delay: 0.3s; }
+        
+        .section-title { text-align: center; font-size: 2.5rem; color: var(--deep-pink); margin-bottom: 3rem; position: relative; }
+        .section-title::after { content: ''; display: block; width: 60px; height: 3px; background: linear-gradient(90deg, var(--primary-pink), var(--accent-pink)); margin: 15px auto 0; border-radius: 2px; }
+        
+        #home { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 100vh; background: var(--bg-color); padding-top: 80px; }
+        .avatar { width: 150px; height: 150px; border-radius: 50%; overflow: hidden; margin-bottom: 2rem; box-shadow: var(--shadow); animation: pulse 2s ease-in-out infinite; }
+        .avatar img { width: 100%; height: 100%; object-fit: cover; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        .home-title { font-size: 3.5rem; font-weight: 700; margin-bottom: 0.5rem; font-family: 'Noto Serif SC', serif; }
+        .home-subtitle { font-size: 1.3rem; color: var(--text-light); margin-bottom: 2rem; }
+        .home-buttons { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-bottom: 3rem; }
+        .btn { padding: 0.8rem 2rem; border: none; border-radius: 30px; font-size: 1rem; font-weight: 500; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: inline-block; }
+        .btn-primary { background: linear-gradient(135deg, var(--primary-pink), var(--accent-pink)); color: var(--white); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+        .btn-outline { background: var(--white); color: var(--accent-pink); border: 2px solid var(--primary-pink); }
+        .btn-outline:hover { background: var(--primary-pink); color: var(--white); }
+        .home-signature { font-size: 1rem; color: var(--text-light); font-style: italic; }
+        
+        .about-container { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; align-items: start; }
+        .about-photo { width: 100%; aspect-ratio: 3/4; background: linear-gradient(145deg, var(--primary-pink), var(--accent-pink)); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 5rem; color: var(--white); box-shadow: var(--shadow); }
+        .about-info { background: var(--white); padding: 2rem; border-radius: 20px; box-shadow: var(--shadow); }
+        .about-info h3 { color: var(--deep-pink); font-size: 1.5rem; margin-bottom: 1.5rem; }
+        .info-item { display: flex; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px dashed var(--primary-pink); }
+        .info-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .info-label { font-weight: 600; color: var(--accent-pink); min-width: 80px; }
+        
+        .resume-container { max-width: 1000px; margin: 0 auto; }
+        .resume-section { background: var(--white); padding: 2rem; border-radius: 20px; box-shadow: var(--shadow); margin-bottom: 2rem; }
+        .resume-section h3 { color: var(--deep-pink); font-size: 1.4rem; margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--primary-pink); }
+        .resume-item { margin-bottom: 1.5rem; }
+        .resume-item-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+        .resume-item-title { font-weight: 600; }
+        .resume-item-time { color: var(--accent-pink); font-size: 0.9rem; }
+        .resume-item-subtitle { color: var(--text-light); font-size: 0.95rem; margin-bottom: 0.5rem; }
+        .resume-item-content { color: var(--text-light); font-size: 0.95rem; padding-left: 1rem; border-left: 3px solid var(--primary-pink); }
+        
+        .skills-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .skill-tag { background: linear-gradient(135deg, var(--primary-pink), var(--accent-pink)); color: var(--white); padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.9rem; }
+        
+        .papers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; max-width: 1000px; margin: 0 auto; }
+        .paper-card { background: var(--white); border-radius: 15px; overflow: hidden; box-shadow: var(--shadow); transition: all 0.3s ease; }
+        .paper-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
+        .paper-cover { height: 150px; background: linear-gradient(135deg, var(--primary-pink), var(--accent-pink)); display: flex; align-items: center; justify-content: center; font-size: 3rem; color: var(--white); }
+        .paper-info { padding: 1.5rem; }
+        .paper-title { font-weight: 600; margin-bottom: 0.5rem; font-size: 1.1rem; }
+        .paper-course { color: var(--accent-pink); font-size: 0.9rem; margin-bottom: 0.5rem; }
+        .paper-desc { color: var(--text-light); font-size: 0.9rem; }
+        
+        .works-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; max-width: 1000px; margin: 0 auto; }
+        .work-card { background: var(--white); border-radius: 15px; overflow: hidden; box-shadow: var(--shadow); transition: all 0.3s ease; }
+        .work-card:hover { transform: scale(1.02); box-shadow: var(--shadow-hover); }
+        .work-image { height: 180px; background: linear-gradient(135deg, var(--primary-pink), var(--accent-pink)); display: flex; align-items: center; justify-content: center; font-size: 3rem; color: var(--white); }
+        .work-info { padding: 1.5rem; }
+        .work-name { font-weight: 600; margin-bottom: 0.3rem; }
+        .work-course { color: var(--accent-pink); font-size: 0.85rem; margin-bottom: 0.5rem; }
+        .work-desc { color: var(--text-light); font-size: 0.85rem; }
+        
+        #contact { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .contact-card { background: var(--white); padding: 3rem; border-radius: 25px; box-shadow: var(--shadow); text-align: center; max-width: 500px; width: 100%; }
+        .contact-avatar { width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, var(--primary-pink), var(--accent-pink)); display: flex; align-items: center; justify-content: center; font-size: 3rem; color: var(--white); margin: 0 auto 2rem; }
+        .contact-item { display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 1rem; font-size: 1.1rem; }
+        .contact-icon { color: var(--accent-pink); }
+        
+        footer { text-align: center; padding: 2rem; background: linear-gradient(135deg, var(--primary-pink), var(--accent-pink)); color: var(--white); }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .home-title { font-size: 2.5rem; }
+            .about-container { grid-template-columns: 1fr; }
+            .section-title { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-logo">袁睿琳</div>
+        <ul class="nav-links">
+            <li><a href="#home">首页</a></li>
+            <li><a href="#about">关于我</a></li>
+            <li><a href="#resume">个人简历</a></li>
+            <li><a href="#papers">论文作业</a></li>
+            <li><a href="#works">设计作品</a></li>
+            <li><a href="#games">游戏</a></li>
+            <li><a href="#contact">联系我</a></li>
+        </ul>
+    </nav>
+
+    <section id="home">
+        <div class="avatar"><img src="photo.jpg" alt="袁睿琳"></div>
+        <h1 class="home-title">袁睿琳 Relin</h1>
+        <p class="home-subtitle">浙江大学文学院｜汉语言文学｜2026应届生</p>
+        <div class="home-buttons">
+            <a href="#resume" class="btn btn-primary">个人简历</a>
+            <a href="#papers" class="btn btn-outline">论文and作业</a>
+            <a href="#works" class="btn btn-outline">设计作品</a>
+            <a href="#contact" class="btn btn-outline">联系我</a>
+        </div>
+        <p class="home-signature">保持热爱，认真成长 💕</p>
+    </section>
+
+    <section id="about">
+        <h2 class="section-title">关于我 · About Me</h2>
+        <div class="resume-container">
+            <div class="resume-section">
+                <h3>基本信息</h3>
+                <div class="info-item"><span class="info-label">姓名</span><span>袁睿琳</span></div>
+                <div class="info-item"><span class="info-label">年龄</span><span>21岁</span></div>
+                <div class="info-item"><span class="info-label">性别</span><span>女</span></div>
+                <div class="info-item"><span class="info-label">学校</span><span>浙江大学文学院</span></div>
+                <div class="info-item"><span class="info-label">专业</span><span>汉语言文学（本科）</span></div>
+                <div class="info-item"><span class="info-label">政治面貌</span><span>共青团员</span></div>
+                <div class="info-item"><span class="info-label">意向城市</span><span>全国</span></div>
+                <div class="info-item"><span class="info-label">期望薪资</span><span>6k-8k</span></div>
+            </div>
+            <div class="resume-section">
+                <h3>个人描述</h3>
+                <p style="color: var(--text-light); padding: 1rem; background: var(--bg-color); border-radius: 10px; line-height: 1.8;">热爱生活，保持真诚与热爱，对待事情用心专注。乐于学习，勇于尝试，在不断探索中沉淀自己。始终以积极平和的心态面对挑战，努力成为更自律、更优秀的人。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="resume">
+        <h2 class="section-title">个人简历 · Resume</h2>
+        <div class="resume-container">
+            <div class="resume-section">
+                <h3>一、教育经历</h3>
+                <div class="resume-item">
+                    <div class="resume-item-header">
+                        <span class="resume-item-title">浙江大学文学院 · 汉语言文学专业</span>
+                        <span class="resume-item-time">2022.09 - 2026.07</span>
+                    </div>
+                    <p class="resume-item-subtitle">本科</p>
+                </div>
+                
+                <h4 style="color: var(--deep-pink); font-size: 1.1rem; margin: 1.5rem 0 1rem;">📚 学业成绩</h4>
+                <div style="overflow-x: auto;">
+                <table style="width:100%; border-collapse: collapse; font-size: 0.75rem; border-radius: 10px; overflow: hidden; margin-bottom: 1rem; table-layout: fixed;">
+                    <tr style="background: linear-gradient(135deg, var(--primary-pink), var(--accent-pink)); color: white;">
+                        <th style="padding:10px; text-align:center; width:12%;">课程类别</th>
+                        <th style="padding:10px; text-align:left; width:30%;">课程名称</th>
+                        <th style="padding:10px; text-align:center; width:10%;">选必修</th>
+                        <th style="padding:10px; text-align:center; width:8%;">学分</th>
+                        <th style="padding:10px; text-align:center; width:8%;">成绩</th>
+                        <th style="padding:10px; text-align:center; width:8%;">通过</th>
+                    </tr>
+                    <tr style="background: var(--white);"><td style="padding:10px; text-align:center; color: var(--accent-pink); font-weight:500;">专业基础</td><td style="padding:10px;">语言学基础</td><td style="padding:10px; text-align:center;">必修</td><td style="padding:10px; text-align:center;">2.0</td><td style="padding:10px; text-align:center; color: var(--deep-pink); font-weight:600;">89</td><td style="padding:10px; text-align:center; color: green;">✓</td></tr>
+                    <tr style="background: var(--bg-color);"><td style="padding:10px; text-align:center; color: var(--accent-pink); font-weight:500;" rowspan="6">专业必修</td><td style="padding:10px;">文学理论</td><td style="padding:10px; text-align:center;">必修</td><td style="padding:10px; text-align:center;">3.0</td><td style="padding:10px; text-align:center; color: var(--deep-pink); font-weight:600;">86</td><td style="padding:10px; text-align:center; color: green;">✓</td></tr>
+                    <tr style="background: var(--bg-color);"><td style="padding:10px;">中国古代文学史Ⅰ</td><td style="padding:10px; text-align:center;">必修</td><td style="padding:10px; text-align:center;">3.0</td><td style="padding:10px; text-align:center; color: var(--deep-pink); font-weight:600;">78</td><td style="padding:10px; text-align:center; color: green;">✓</td></tr>
+                    <tr style="background: var(--white);"><td style="padding:10px;">中国古代文学史Ⅱ</td><td style="padding:10px; text-align:center;">必修</td><td style="padding:10px; text-align:center;">3.0</td><td style="padding:10px; text-align:center; color: var(--deep-pink); font-weight:600;">87</td><td style="padding:10px; text-align:center; color: green;">✓</td></tr>
+                    <tr style="background: var(--bg-color);"><td style="padding:10px;">中国古代文学史Ⅲ</td><td style="padding:10px; text-align:center;">必修</td><td style="padding:10px; text-align:center;">3.0</td><td style="padding:10px; text-align:center; color: var(--deep-pink); font-weight:600;">86</td><td style="padding:10px; text-align:center; color: green;">✓</td></tr>
+                    <tr style="background: var(--white);"><td style="padding:10px;">中国现当代文学史Ⅱ</td><td style="padding:10px; text-align:center;">必修</td><td style="padding:10px; text-align:center;">3.0</td><td style="padding:10px; text-align:center; color: var(--deep-pink); font-weight:600;">77</td><td style="padding:10px; text-align:center; color: green;">✓</td></tr>
+                    <tr style="background: var(--bg-color);"><td style="padding:10px;">古代汉语Ⅱ</td><td style="padding:10px; text-align:center;">必修</td><td style="padding:10px; text-align:center;">3.0</td><td style="padding:10px; text-align:center; color: var(--deep-pink); font-weight:600;">86</td><td style="padding:10px; text-align:center; color: green;">✓</td></tr>
+                    <tr style="background: var(--white);"><td style="padding:10px; text-align:center; color: var(--accent-pink); font-weight:500;" rowspan="8">专业方向(必修)</td><td style="padding:10px;">世界文学史</td><td style="padding:10px; text-align:center;">必修</td><td style="padding:10px; text-align:center;">3.0</td><td style="padding:10px; text-align:center; color: var(--deep-pink); font-weight:600;">89</td><td style="padding:10px; text-align:center; color: green;">✓</td></tr>
+                    <tr style="background: var(--bg-color);"><td style="padding:10px;">中国编辑出版史</td><td style="padding:10px; text-align:center;">必修</td><td style="padding:10px; text-align:center;">2.0</td><td style="padding:10px; text-align:center; color: var(--deep-pink); font-weight:600;">88</td><td style="padding:10px; text-align:center; color: green;">✓</td></tr>
+                    <tr style="background: var(--white);"><td style="padding:10px;">中国现当代文学史Ⅰ</td><td style="padding:10px; text-align:center;">必修</td><td style="padding:10px; text-align:center;">2.0</td><td style="padding:10px; text-align:center; color: var(--deep-pink); font-weight:600;">72</td><td style="padding:10px; text-align:center; color: green;">✓</td></tr>
+                    <tr style="background: var(--bg-color);"><td style="padding:10px;">现代汉语</td><td style="padding:10px; text-align:center;">必修</td><td style="padding:10px; text-align:center;">3.0</td><td style="padding:10px; text-align:center; color: var(--deep-pink); font-weight:600;">67</td><td style="padding:10px; text-align:center; color: green;">✓</td></tr>
+                    <tr style="background: var(--white);"><td style="padding:10px;">古代汉语Ⅰ</td><td style="padding:10px; text-align:center;">必修</td><td style="padding:10px; text-align:center;">3.0</td><td style="padding:10px; text-align:center; color: var(--deep-pink); font-weight:600;">72</td><td style="padding:10px; text-align:center; color: green;">✓</td></tr>
+                    <tr style="background: var(--bg-color);"><td style="padding:10px;">编辑出版学概论</td><td style="padding:10px; text-align:center;">必修</td><td style="padding:10px; text-align:center;">2.0</td><td style="padding:10px; text-align:center; color: var(--deep-pink); font-weight:600;">91</td><td style="padding:10px; text-align:center; color: green;">✓</td></tr>
+                    <tr style="background: var(--white);"><td style="padding:10px;">编辑策划</td><td style="padding:10px; text-align:center;">必修</td><td style="padding:10px; text-align:center;">3.0</td><td style="padding:10px; text-align:center; color: var(--deep-pink); font-weight:600;">92</td><td style="padding:10px; text-align:center; color: green;">✓</td></tr>
+                    <tr style="background: var(--bg-color);"><td style="padding:10px;">数字出版</td><td style="padding:10px; text-align:center;">必修</td><td style="padding:10px; text-align:center;">2.0</td><td style="padding:10px; text-align:center; color: var(--deep-pink); font-weight:600;">85</td><td style="padding:10px; text-align:center; color: green;">✓</td></tr>
+                    <tr style="background: var(--white);"><td style="padding:10px; text-align:center; color: var(--accent-pink); font-weight:500;" rowspan="9">专业方向(选修)</td><td style="padding:10px;">中国古代文论</td><td style="padding:10px; text-align:center;">选修</td><td style="padding:10px; text-align:center;">2.0</td><td style="padding:10px; text-align:center; color: var(--deep-pink); font-weight:600;">88</td><td style="padding:10px; text-align:center; color: green;">✓</td></tr>
+                    <tr style="background: var(--bg-color);"><td style="padding:10px;">电视节目策划与编导</td><td style="padding:10px; text-align:center;">选修</td><td style="padding:10px; text-align:center;">2.0</td><td style="padding:10px; text-align:center; color: var(--deep-pink); font-weight:600;">80</td><td style="padding:10px; text-align:center; color: green;">✓</td></tr>
+                    <tr style="background: var(--white);"><td style="padding:10px;">现代文学思潮研究</td><td style="padding:10px; text-align:center;">选修</td><td style="padding:10px; text-align:center;">2.0</td><td style="padding:10px; text-align:center; color: var(--deep-pink); font-weight:600;">88</td><td style="padding:10px; text-align:center; color: green;">✓</td></tr>
+                    <tr style="background: var(--bg-color);"><td style="padding:10px;">现代浙籍作家研究</td><td style="padding:10px; text-align:center;">选修</td><td style="padding:10px; text-align:center;">2.0</td><td style="padding:10px; text-align:center; color: var(--deep-pink); font-weight:600;">89</td><td style="padding:10px; text-align:center; color: green;">✓</td></tr>
+                    <tr style="background: var(--white);"><td style="padding:10px;">中国古代小说史</td><td style="padding:10px; text-align:center;">选修</td><td style="padding:10px; text-align:center;">2.0</td><td style="padding:10px; text-align:center; color: var(--deep-pink); font-weight:600;">88</td><td style="padding:10px; text-align:center; color: green;">✓</td></tr>
+                    <tr style="background: var(--bg-color);"><td style="padding:10px;">当前文化现象与文学热点研究</td><td style="padding:10px; text-align:center;">选修</td><td style="padding:10px; text-align:center;">2.0</td><td style="padding:10px; text-align:center; color: var(--deep-pink); font-weight:600;">92</td><td style="padding:10px; text-align:center; color: green;">✓</td></tr>
+                    <tr style="background: var(--white);"><td style="padding:10px;">明清诗文研究</td><td style="padding:10px; text-align:center;">选修</td><td style="padding:10px; text-align:center;">2.0</td><td style="padding:10px; text-align:center; color: var(--deep-pink); font-weight:600;">90</td><td style="padding:10px; text-align:center; color: green;">✓</td></tr>
+                    <tr style="background: var(--bg-color);"><td style="padding:10px;">唐宋诗歌研究</td><td style="padding:10px; text-align:center;">选修</td><td style="padding:10px; text-align:center;">2.0</td><td style="padding:10px; text-align:center; color: var(--deep-pink); font-weight:600;">89</td><td style="padding:10px; text-align:center; color: green;">✓</td></tr>
+                    <tr style="background: var(--white);"><td style="padding:10px;">文学与书法</td><td style="padding:10px; text-align:center;">选修</td><td style="padding:10px; text-align:center;">2.0</td><td style="padding:10px; text-align:center; color: var(--deep-pink); font-weight:600;">89</td><td style="padding:10px; text-align:center; color: green;">✓</td></tr>
+                    <tr style="background: var(--bg-color);"><td style="padding:10px; text-align:center; color: var(--accent-pink); font-weight:500;" rowspan="4">专业选修</td><td style="padding:10px;">汉语言文学各学科前沿</td><td style="padding:10px; text-align:center;">选修</td><td style="padding:10px; text-align:center;">3.0</td><td style="padding:10px; text-align:center; color: var(--deep-pink); font-weight:600;">92</td><td style="padding:10px; text-align:center; color: green;">✓</td></tr>
+                    <tr style="background: var(--white);"><td style="padding:10px;">外国诗歌研究</td><td style="padding:10px; text-align:center;">选修</td><td style="padding:10px; text-align:center;">2.0</td><td style="padding:10px; text-align:center; color: var(--deep-pink); font-weight:600;">83</td><td style="padding:10px; text-align:center; color: green;">✓</td></tr>
+                    <tr style="background: var(--bg-color);"><td style="padding:10px;">当代中国文艺理论思潮研究</td><td style="padding:10px; text-align:center;">选修</td><td style="padding:10px; text-align:center;">2.0</td><td style="padding:10px; text-align:center; color: var(--deep-pink); font-weight:600;">89</td><td style="padding:10px; text-align:center; color: green;">✓</td></tr>
+                    <tr style="background: var(--white);"><td style="padding:10px;">汉语与古代文化</td><td style="padding:10px; text-align:center;">选修</td><td style="padding:10px; text-align:center;">2.0</td><td style="padding:10px; text-align:center; color: var(--deep-pink); font-weight:600;">96</td><td style="padding:10px; text-align:center; color: green;">✓</td></tr>
+                </table>
+                </div>
+            </div>
+
+            <div class="resume-section">
+                <h3>二、项目经历</h3>
+                <div class="resume-item">
+                    <div class="resume-item-header"><span class="resume-item-title">浙江大学大学生素质训练计划（SQTP）</span><span class="resume-item-time">2023.04 - 2023.06</span></div>
+                    <p class="resume-item-subtitle">项目负责人</p>
+                    <p class="resume-item-content">负责收集当地旅游信息并制作成推文进行宣传，策划线上线下活动。项目成果：线上推文阅读量达百次，线下活动吸引超百位参与者。</p>
+                </div>
+                <div class="resume-item">
+                    <div class="resume-item-header"><span class="resume-item-title">浙江大学学生资助对象教育实践项目（NSEP）</span><span class="resume-item-time">2024.11 - 2025.09</span></div>
+                    <p class="resume-item-subtitle">项目负责人</p>
+                    <p class="resume-item-content">针对校园有声空间存在的问题进行调研，优化室内外学习交流空间。制作《有声空间指南》手册，超过50位学生参与问卷调查。</p>
+                </div>
+                <div class="resume-item">
+                    <div class="resume-item-header"><span class="resume-item-title">浙江大学寒假大学生社会实践</span><span class="resume-item-time">2024.01 - 2024.02</span></div>
+                    <p class="resume-item-subtitle">参与成员</p>
+                    <p class="resume-item-content">参观博物馆和烈士纪念馆、采访老党员老军人、参与社区微党课宣讲。负责制作推文及PPT。</p>
+                </div>
+                <div class="resume-item">
+                    <div class="resume-item-header"><span class="resume-item-title">浙江大学暑假大学生社会实践</span><span class="resume-item-time">2023.07 - 2023.08</span></div>
+                    <p class="resume-item-subtitle">参与成员</p>
+                    <p class="resume-item-content">调查居民对亚运的了解程度，进行健康打卡活动、知识讲座、问卷调查及线上线下宣传。</p>
+                </div>
+            </div>
+
+            <div class="resume-section">
+                <h3>三、实习经历</h3>
+                <div class="resume-item">
+                    <div class="resume-item-header"><span class="resume-item-title">杭州游卡网络技术有限公司</span><span class="resume-item-time">2026.01 - 2026.04</span></div>
+                    <p class="resume-item-subtitle">桌游产品校对</p>
+                    <p class="resume-item-content">负责桌游、卡牌产品最终文件的校对工作，确保产品信息、文字内容及工艺需求的准确性。参与完善产品输出规范。</p>
+                </div>
+                <div class="resume-item">
+                    <div class="resume-item-header"><span class="resume-item-title">浙江大学数字人文研究中心</span><span class="resume-item-time">2025.07 - 2025.09</span></div>
+                    <p class="resume-item-subtitle">标引校对</p>
+                    <p class="resume-item-content">负责3万字智慧古籍平台校对工作，为繁体字提供解释和标引。构建唐伯虎、上官婉儿社会关系图，模型语料校对累计积分2000+。</p>
+                </div>
+                <div class="resume-item">
+                    <div class="resume-item-header"><span class="resume-item-title">浙江少年儿童出版社</span><span class="resume-item-time">2024.07 - 2024.08</span></div>
+                    <p class="resume-item-subtitle">市场营销部 · 助理编辑</p>
+                    <p class="resume-item-content">负责超千页文稿校对工作，降低错别字率。协助"沈石溪动物小说丛书"销售订单追踪，协调处理超百个订单问题。</p>
+                </div>
+                <div class="resume-item">
+                    <div class="resume-item-header"><span class="resume-item-title">浙江大学新型城镇化研究院</span><span class="resume-item-time">2023.04 - 2023.06</span></div>
+                    <p class="resume-item-subtitle">CIU研究助理</p>
+                    <p class="resume-item-content">从县政府官网收集县域财政数据，累计处理超三十个县域财务报告。熟练运用Excel进行数据整理和分析。</p>
+                </div>
+            </div>
+
+            <div class="resume-section">
+                <h3>四、校园实践</h3>
+                <div class="resume-item">
+                    <div class="resume-item-header"><span class="resume-item-title">浙江大学营养与健康协会</span><span class="resume-item-time">2023.10 - 2025.09</span></div>
+                    <p class="resume-item-subtitle">社团负责人</p>
+                    <p class="resume-item-content">管理营养小屋每月薪酬发放。在"营养小屋"提供体脂检测服务，累计服务超千位学生、老师及游客。获学年社团工作考核优秀。</p>
+                </div>
+                <div class="resume-item">
+                    <div class="resume-item-header"><span class="resume-item-title">浙江大学青年志愿服务</span><span class="resume-item-time">2022.11 - 2024.12</span></div>
+                    <p class="resume-item-subtitle">一星级志愿者 | 累计时长58.66小时</p>
+                    <p class="resume-item-content">图书馆管理：运河之星图书馆管理员。服务老人：在"阳光老人之家"帮助10余名老人学会操作手机。公益编织：为留守儿童制作围巾。</p>
+                </div>
+            </div>
+
+            <div class="resume-section">
+                <h3>五、技能证书</h3>
+                <h4 style="color: var(--accent-pink); margin-bottom: 0.5rem;">证书</h4>
+                <div class="skills-grid"><span class="skill-tag">英语CET-4</span><span class="skill-tag">C2驾驶证</span><span class="skill-tag">高中语文教师资格证</span><span class="skill-tag">高校计算机二级</span><span class="skill-tag">普通话二甲</span></div>
+                <h4 style="color: var(--accent-pink); margin: 1rem 0 0.5rem;">技能</h4>
+                <div class="skills-grid"><span class="skill-tag">Xmind</span><span class="skill-tag">PowerPoint</span><span class="skill-tag">Excel</span><span class="skill-tag">Word</span><span class="skill-tag">PS</span><span class="skill-tag">剪映</span><span class="skill-tag">可画</span></div>
+                <h4 style="color: var(--accent-pink); margin: 1rem 0 0.5rem;">兴趣爱好</h4>
+                <div class="skills-grid"><span class="skill-tag">📚 读书</span><span class="skill-tag">🧶 钩织</span><span class="skill-tag">🧵 缝纫</span><span class="skill-tag">📿 串珠</span><span class="skill-tag">🎮 游戏</span></div>
+            </div>
+
+
+        </div>
+    </section>
+
+    <section id="papers">
+        <h2 class="section-title">课程论文 · Papers</h2>
+        <div class="papers-grid">
+            <div class="paper-card">
+                <div class="paper-cover">📄</div>
+                <div class="paper-info">
+                    <h4 class="paper-title">不可避免走上黑暗之路——玛格丽特·阿特伍德诗歌《门》的诗性微探</h4>
+                    <p class="paper-course">课程论文</p>
+                    <p class="paper-desc">摘要：诗集《门》收录了玛格丽特·阿特伍德1995年到2007年间的诗歌创作，本文探讨其语言、意象、结构和主题。</p>
+                    <a href="https://my.feishu.cn/docx/FWGudKm7OoXun3x1tUncrXBpnZd" target="_blank" class="btn btn-primary" style="margin-top:1rem;padding:0.5rem 1rem;font-size:0.9rem;">查看论文</a>
+                </div>
+            </div>
+            <div class="paper-card">
+                <div class="paper-cover">📄</div>
+                <div class="paper-info">
+                    <h4 class="paper-title">《文心雕龙·序志》篇"二梦"解读综述</h4>
+                    <p class="paper-course">课程论文</p>
+                    <p class="paper-desc">摘要：通过对《文心雕龙·序志》篇中刘勰所述"二梦"的深入分析，探讨彩云、丹漆礼器以及"南行"等关键意象的寓意。</p>
+                    <a href="https://my.feishu.cn/docx/KlXjd59SZo0GzYx2YEOcVwyanCT" target="_blank" class="btn btn-primary" style="margin-top:1rem;padding:0.5rem 1rem;font-size:0.9rem;">查看论文</a>
+                </div>
+            </div>
+            <div class="paper-card">
+                <div class="paper-cover">📄</div>
+                <div class="paper-info">
+                    <h4 class="paper-title">从周氏兄弟笔下的范爱农看辛亥革命时期知识分子形象</h4>
+                    <p class="paper-course">课程论文</p>
+                    <p class="paper-desc">摘要：通过对周氏兄弟笔下范爱农形象的深入分析，探讨辛亥革命时期知识分子在面临社会变革时的选择与困境。</p>
+                    <a href="https://my.feishu.cn/docx/NGg7d7Q3ioKT2RxQIR6cAgTtnCf" target="_blank" class="btn btn-primary" style="margin-top:1rem;padding:0.5rem 1rem;font-size:0.9rem;">查看论文</a>
+                </div>
+            </div>
+            <div class="paper-card">
+                <div class="paper-cover">📄</div>
+                <div class="paper-info">
+                    <h4 class="paper-title">左翼文学观念在延安文艺座谈会前的理论准备</h4>
+                    <p class="paper-course">课程论文</p>
+                    <p class="paper-desc">摘要：探讨左翼文学时期论争如何为延安时期文学座谈会做理论准备，分析革命文艺话语体系的构建。</p>
+                    <a href="https://my.feishu.cn/docx/W2oId7XF6o94NQx8bGDcstKlnMc" target="_blank" class="btn btn-primary" style="margin-top:1rem;padding:0.5rem 1rem;font-size:0.9rem;">查看论文</a>
+                </div>
+            </div>
+            <div class="paper-card">
+                <div class="paper-cover">📄</div>
+                <div class="paper-info">
+                    <h4 class="paper-title">对诗词中歧义的研究—以语义学为基础</h4>
+                    <p class="paper-course">课程论文</p>
+                    <p class="paper-desc">摘要：探讨古代诗词中歧义语言的存在与功能，通过语义学的角度进行分析，选取唐宋时期作品进行案例分析。</p>
+                    <a href="https://my.feishu.cn/docx/TQjsdgzZ2o856vxKbPdcaw4unMh" target="_blank" class="btn btn-primary" style="margin-top:1rem;padding:0.5rem 1rem;font-size:0.9rem;">查看论文</a>
+                </div>
+            </div>
+            <div class="paper-card">
+                <div class="paper-cover">📄</div>
+                <div class="paper-info">
+                    <h4 class="paper-title">浅论唐寅诗文中的侠客形象</h4>
+                    <p class="paper-course">课程论文</p>
+                    <p class="paper-desc">摘要：关注唐寅诗文中的侠客形象，深度解读和分析其个性特征与艺术表现，探讨其对唐寅个性塑造和诗歌艺术的影响。</p>
+                    <a href="https://my.feishu.cn/docx/GVC3dx5a3ojde8xlEfqcJZTPnvh" target="_blank" class="btn btn-primary" style="margin-top:1rem;padding:0.5rem 1rem;font-size:0.9rem;">查看论文</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="works">
+        <h2 class="section-title">设计作品 · Works</h2>
+        <div class="works-grid">
+            <div class="work-card">
+                <div class="work-image">🎨</div>
+                <div class="work-info">
+                    <h4 class="work-name">Margaret Atwood 诗人海报</h4>
+                    <p class="work-course">课程作业</p>
+                    <p class="work-desc">课程设计作品展示</p>
+                    <a href="https://my.feishu.cn/docx/IXGRdmT5voM3MZxpFRuchE8Un5f" target="_blank" class="btn btn-primary" style="margin-top:0.5rem;padding:0.4rem 0.8rem;font-size:0.8rem;">查看作品</a>
+                </div>
+            </div>
+            <div class="work-card">
+                <div class="work-image">🎨</div>
+                <div class="work-info">
+                    <h4 class="work-name">设计作品2</h4>
+                    <p class="work-course">课程作业</p>
+                    <p class="work-desc">课程设计作品展示</p>
+                    <a href="https://my.feishu.cn/docx/Eftld29qRofpkhxZd8hcbrf9nac" target="_blank" class="btn btn-primary" style="margin-top:0.5rem;padding:0.4rem 0.8rem;font-size:0.8rem;">查看作品</a>
+                </div>
+            </div>
+            <div class="work-card">
+                <div class="work-image">📱</div>
+                <div class="work-info">
+                    <h4 class="work-name">全民营养周 | 哇哦，我的定制营养餐！</h4>
+                    <p class="work-course">活动总结</p>
+                    <p class="work-desc">营养周活动推文展示</p>
+                    <a href="https://mp.weixin.qq.com/s/kBUKrJL585Bkc8-aQow1HQ" target="_blank" class="btn btn-primary" style="margin-top:0.5rem;padding:0.4rem 0.8rem;font-size:0.8rem;">查看作品</a>
+                </div>
+            </div>
+            <div class="work-card">
+                <div class="work-image">📱</div>
+                <div class="work-info">
+                    <h4 class="work-name">活动总结|"营养搭子"和你的搭子一起用心吃饭！</h4>
+                    <p class="work-course">活动总结</p>
+                    <p class="work-desc">营养周活动推文展示</p>
+                    <a href="https://mp.weixin.qq.com/s/6OTYcWV2SbpgaPM-Pujinw" target="_blank" class="btn btn-primary" style="margin-top:0.5rem;padding:0.4rem 0.8rem;font-size:0.8rem;">查看作品</a>
+                </div>
+            </div>
+            <div class="work-card">
+                <div class="work-image">📝</div>
+                <div class="work-info">
+                    <h4 class="work-name">【社会实践】深刻体悟党性力量，凝聚心魂谱新篇</h4>
+                    <p class="work-course">社会实践活动</p>
+                    <p class="work-desc">浙江大学云峰学园学生走进山东省济南市、淄博市开展社会实践活动</p>
+                    <a href="https://mp.weixin.qq.com/s/_dFtzsRzc2TITPXj6zmpIw" target="_blank" class="btn btn-primary" style="margin-top:0.5rem;padding:0.4rem 0.8rem;font-size:0.8rem;">查看作品</a>
+                </div>
+            </div>
+            <div class="work-card">
+                <div class="work-image">📱</div>
+                <div class="work-info">
+                    <h4 class="work-name">投票通道｜哇哦！我的定制营养餐</h4>
+                    <p class="work-course">活动投票</p>
+                    <p class="work-desc">营养周活动作品投票</p>
+                    <a href="https://mp.weixin.qq.com/s/B6M_IssYe1NhQ3Lgj4aBaQ" target="_blank" class="btn btn-primary" style="margin-top:0.5rem;padding:0.4rem 0.8rem;font-size:0.8rem;">查看作品</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="games">
+        <h2 class="section-title">游戏时光 · Games</h2>
+        <div class="resume-container">
+            <div class="resume-section">
+                <h3>我的游戏ID</h3>
+                <div class="info-item"><span class="info-label">第五人格</span><span>今日宜开心嘛 · ID: 449943838</span></div>
+                <div class="info-item"><span class="info-label">王者荣耀</span><span>费列罗包装纸（Q区）</span></div>
+            </div>
+            <div class="resume-section">
+                <h3>第五人格·模仿者游戏体验分析</h3>
+                <p style="color: var(--text-light); font-size: 0.9rem; line-height: 1.8; white-space: pre-line;">模仿者游戏是《第五人格》推出的非对称社交推理玩法，融合了阵营对抗、身份伪装与解谜互动，在保留游戏哥特画风的基础上，跳出了传统追逃的核心框架，带来了全新的社交体验。
+
+一、玩法核心与特色
+1.从阵营与身份设计来看，玩法分为侦探团、模仿者、中立三大阵营，侦探团需完成任务、找出模仿者；模仿者则通过破坏设施制造混乱来袭击侦探团。同时加入中立角色（如棋手、导演等），中立有独立的获胜条件，打破了二元阵营的单调，让局势更风云诡谲，极具变数。
+2.从地图与任务机制来看，模仿者游戏分为10人新手场，10人狂欢场，12人狂欢，12人自由假面，双排玩家可以选择前三，如果强烈杜绝场外的话也可以选择后一，灵活有弹性，能够迎合玩家的兴趣。采用疯人院、闪石金窟随机两种地图，场景不会让玩家觉得单调，侦探团任务以趣味迷你游戏为主（如割草、碎石等），难度低且节奏快，也能让玩家在任务中观察他人行为，为推理提供线索。
+3.从推理与互动体验来看，紧急会议环节是推理玩法核心内容，玩家通过语音/文字交流线索、指认怀疑对象，模仿者需编造谎言伪装身份，侦探团则要通过逻辑分析、话术博弈找出破绽，很好的将"狼人杀"与手游结合在一起。
+
+二、体验感受
+1.模仿者游戏门槛低，无需复杂的操作技巧，更注重语言表达和逻辑思维，适合与好友组队开黑，富有互动趣味性。
+2.延续了游戏标志性的哥特悬疑画风，地图中的昏暗走廊、机关与推理主题高度契合，音效（如脚步声、狼刀爪印、矿车声等）也强化了紧张的悬疑氛围。
+3.单局时长约10-15分钟，短平快的节奏符合移动端碎片化游玩的需求，既能快速获得游戏反馈，也不会因时长过长产生疲惫感。
+4.能够锻炼玩家沟通表达能力，逻辑思维能力，甚至我和好友在游玩时还需要做笔记来进行推理或狡辩。
+5.游戏机制与效果让人产生越挫越勇的心态，使玩家沉浸式体验"案发-推理-破案"流程，常常忘记时间。
+
+三、现存问题与不足
+1.游戏经常有玩家被卡退，导致推理性缺失，降低玩家游戏体验。
+2.单排时遇到无麦、不交流的队友会严重影响推理体验，有时无法充分梳理线索，可以加大恶意挂机处罚力度。
+3.整体框架借鉴了"狼人杀"类玩法，虽结合了《第五人格》的世界观，但核心的任务设计、投票机制等缺乏突破性创新，长期游玩容易产生审美疲劳，可以增加内容与技能。
+
+模仿者游戏，凭借轻松的社交推理模式吸引了大量休闲玩家，也为老玩家提供了玩法新选择。尽管存在些许问题，但作为一款休闲社交玩法，其带来的推理乐趣和互动体验仍值得一试。若后续能优化角色、创新玩法（如自定义规则、新地图），体验会进一步提升。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">联系我 · Contact</h2>
+        <div class="contact-card">
+            <div class="contact-avatar"><img src="photo.jpg" alt="袁睿琳" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+            <div class="contact-item"><span class="contact-icon">📱</span><span>19550208463</span></div>
+            <div class="contact-item"><span class="contact-icon">📧</span><span>3235842365@qq.com</span></div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 袁睿琳 个人主页</p>
+        <p style="margin-top: 0.5rem; opacity: 0.9;">学习不止，温柔成长 💕</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
